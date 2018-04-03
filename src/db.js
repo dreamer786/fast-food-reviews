@@ -18,7 +18,7 @@ const ReviewSchema = new mongoose.Schema({
 	user: { type: Schema.Types.ObjectId, ref: 'User'}
 	store: {type:Schema.Types.ObjectId, ref: 'Store'}
 });
-
+/*
 const Store = new mongoose.Schema({
 	name: {type: String, required: true},
 	streetAddress: {type: String, required: true},
@@ -26,10 +26,10 @@ const Store = new mongoose.Schema({
 	averageRating: {type: Number},
 	reviews: [ReviewSchema]
 });
-
+*/
 mongoose.model('User', UserSchema);
 mongoose.model('Review', ReviewSchema);
-mongoose.model('Store', Store);
+//mongoose.model('Store', Store);
 
 UserSchema.plugin(URLSlugs('username email'));
 Store.plugin(URLSlugs('name address'));

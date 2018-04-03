@@ -8,7 +8,7 @@ const path = require('path');
 const auth = require('./auth.js');
 
 const app = express();
-const Article = mongoose.model('Article');
+const Article = mongoose.model('Review');
 const User = mongoose.model('User');
 
 app.set('view engine', 'hbs');
