@@ -3,7 +3,6 @@ const URLSlugs = require('mongoose-url-slugs');
 const Schema = mongoose.Schema;
 //User -> Review: 1 -> many
 //Review to User: many -> 1
-//Store to Review: 1 -> many
 const UserSchema = new mongoose.Schema({
 	username: {type:String, unique: true, required: true},
 	email: {type: String, unique: true, required: true},
