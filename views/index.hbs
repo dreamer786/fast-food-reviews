@@ -1,0 +1,24 @@
+<h2> All Reviews </h2>
+<table>
+	<tr>
+		<th> Restaurant </th>
+		<th> Street Address </th>
+		<th> Borough </th>
+		<th> Zip </th>
+		<th> Review </th>
+		<th> Rating </th>
+
+	{{#each results as |result|}}
+	<tr> 
+		
+		<td> {{result.storeName}} </td>
+		<td> {{result.streetAddress}}</td>
+		<td> {{result.borough}}</td>
+		<td> {{result.zip}}</td>
+		<td> {{result.review}}</td>
+		<td> {{result.rating}} </td>
+
+		
+	</tr>
+	{{/each}}
+</table>
