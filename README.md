@@ -40,10 +40,10 @@ An example Review
 
 ```
 
-## [Link to Commented First Draft Schema](db.js) 
+## [Link to Commented First Draft Schema] 
 
 (___TODO__: create a first draft of your Schemas in db.js and link to it_)
-
+![first draft schema](src/db.js)
 
 ## Wireframes
 
@@ -51,7 +51,7 @@ An example Review
 
 
 / - home page than has login, register, all the reviews, and allows user to filter reviews
-![home](/home.png)
+![home](/documentation/home.png)
  
 /login - allows users to login
 
@@ -73,7 +73,6 @@ An example Review
 (___TODO__: draw out a site map that shows how pages are related to each other_)
 ![site map](documentation/sitemap.png)
 
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
 
 ## User Stories or Use Cases
 
@@ -107,6 +106,7 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 ## [Link to Initial Main Project File](app.js) 
 
 (___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
+![app.js](src/app.js)
 
 ## Annotations / References Used
 
