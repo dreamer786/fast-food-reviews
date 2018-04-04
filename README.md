@@ -75,17 +75,13 @@ An example Review
 
 ## Research Topics
 
+* (5 points) Server side Javascript library (Passport)
+	* Passport is authentication middleware. I will use the passport-local module because the method 
+	* logging in for my app will be with just a username and password. This will be useful in which it 
+	* implements the authentication, which saves lines of code and abstracts the code. 
 
-* (5 points) Automated functional testing for all of your routes:
-	* I will use selenium or headless chrome to test my routes. Headless chrome can run without having the
-	memory overhead of running an actual Chrome browser. I will use it because it eliminates the need 
-	to open my browser and manually go to web pages to test them out. 
-* (3 points) Unit testing with Javascript (Mocha) OR client-side Javascript library (JQuery)
-	* I will use this to test whether my login and register functions work properly. 
-	* The cases include logging in with incorrect username and/or password, logging in with correct username/password.
-	* Other cases include registering with a valid password and invalid password. 
-	
-	* JQuery abstracts html from javascript and wraps Javascript codes into methods. I would use it to help
+* (3 points) Client-side Javascript library (JQuery)	
+	* JQuery abstracts html from javascript and wraps Javascript code into methods. I would use it to help
 	* with form validation. For example, if the user forgets to enter a field, that field can be highlighted to
 	* make it easy to see what information is missing. 
 
@@ -98,6 +94,6 @@ An example Review
 
 ## Annotations / References Used
 
- have not used any sources yet
-1. 
-2. 
+1. http://www.passportjs.org/docs/username-password/ 
+2. http://api.jquery.com/category/forms/ 
+3. https://jqueryvalidation.org/
