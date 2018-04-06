@@ -1,0 +1,31 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var bcrypt   = require('bcrypt-nodejs');
+
+
+const ReviewSchema = new mongoose.Schema({
+	storeName: {type: String, required: true},
+	review: {type: String, required: true},
+	rating: {type: Number, required: true},
+	user: { type: Schema.Types.ObjectId, ref: 'User'}
+});
+
+var userSchema = mongoose.Schema({
+	local: {username: {type:String, required: true},
+			email: {type:String, required: true}, 
+			password: {type:String, required:true},
+			reviews: [ReviewSchema]}
+
+});
+
+
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
+
+module.exports.User = mongoose.model('User', userSchema);
+module.exports.Review = mongoose.model('Review', ReviewSchema);
