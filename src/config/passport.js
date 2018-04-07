@@ -1,6 +1,6 @@
 var LocalStrategy   = require('passport-local').Strategy;
-var User = require('../models/user').User;
-var Review = require('../models/user').Review;
+var User = require('../models/db').User;
+var Review = require('../models/db').Review;
 
 module.exports = function(passport) {
 
@@ -108,7 +108,6 @@ module.exports = function(passport) {
 
     }));
 
-    //start authenticated session
 
 
 

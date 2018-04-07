@@ -3,6 +3,7 @@
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 3000;
+console.log("port ", process.env.PORT);
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -12,13 +13,31 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-require('./models/user');
+require('./models/db');
 
 
-var configDB = require('./config/database.js');
+// is the environment variable, NODE_ENV, set to PRODUCTION? 
+let dbconf;
+if (process.env.NODE_ENV === 'PRODUCTION') {
+	 // if we're in PRODUCTION mode, then read the configration from a file
+	 // use blocking file io to do this...
+	 const fs = require('fs');
+	 const path = require('path');
+	 const fn = path.join(__dirname, 'config.json');
+	 const data = fs.readFileSync(fn);
+
+	 // our configuration file will be in json, so parse it and set the
+	 // conenction string appropriately!
+	 const conf = JSON.parse(data);
+	 dbconf = conf.dbconf;
+} else {
+	 // if we're not in PRODUCTION mode, then use
+	 dbconf = 'mongodb://localhost/finalproject';
+}
+//var configDB = require('./config/database.js');
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+mongoose.connect(dbconf); 
 
 require('./config/passport')(passport); // pass passport for configuration
 

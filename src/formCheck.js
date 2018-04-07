@@ -1,6 +1,4 @@
-$(document).ready(function{
-
-
+$(document).ready(function {
 	$("#username").change(function{
 		if (document.getElementById("#username").value === null || document.getElementById("#username").value === ""){
 			$("#username").focus();
@@ -14,4 +12,8 @@ $(document).ready(function{
 		}
 	});
 
+
 });
+
+
+	
