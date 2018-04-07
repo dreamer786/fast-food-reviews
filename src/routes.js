@@ -1,8 +1,17 @@
 module.exports = function(app, passport) {
-
+    const mongoose = require('mongoose');
+    const User = mongoose.model("User");
+    const Review = mongoose.model("Review");
     //home page
     app.get('/', function(req, res) {
-        res.render('index'); // load the index.ejs file
+        Review.find({}, (err,result,count) => {
+            if (err){
+                console.log(err);
+            }
+            else{
+                res.render("index", {results: result});
+            }
+        });
     });
 
    
@@ -20,9 +29,6 @@ module.exports = function(app, passport) {
                         failureFlash : true // allow flash messages
     }));
 
-    // =====================================
-    // SIGNUP ==============================
-    // =====================================
     // show the signup form
     app.get('/signup', function(req, res) {
 
@@ -40,8 +46,6 @@ module.exports = function(app, passport) {
     // =====================================
     // PROFILE SECTION =====================
     // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile');
     });
@@ -55,6 +59,41 @@ module.exports = function(app, passport) {
     });
 
     //ADD REVIEW
+    app.get("/review/add", function(req,res){
+        if (!req.session.user){
+            console.log("not logged in");
+            res.redirect("/");
+        }
+        else{
+            res.render("addReview");
+        }
+    });
+
+    //POST REVIEW
+    app.post("/review/add", function(req,res){
+        if (!req.session.user){
+            console.log("not logged in");
+            res.redirect("/");
+        }
+        else{
+            const newReview = new Review();
+            newReview.storeName = req.body.storeName;
+            newReview.borough = req.body.borough;
+            newReview.streetAddress = req.body.streetAddress;
+            newReview.zip = req.body.zip;
+            newReview.review = req.body.review;
+            newReview.rating = req.body.rating;
+
+            newReview.save(err => {
+                if (err){
+                    res.render("addReview", {message: "review save error"});
+                }
+                else{
+                    res.redirect("/");
+                }
+            })
+        }
+    });
 };
 
 // route middleware to make sure a user is logged in

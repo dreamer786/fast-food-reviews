@@ -1,0 +1,39 @@
+<h1> Add a Review </h1>
+
+{{#if message}}
+	{{message}}
+{{/if}}
+<div class = "form-group">
+Fast Food Chain: <select name = "storeName" class="form-control" form = "add">
+					<option value = "McDonald's"> McDonald's </option>
+					<option value = "Dunkin Donuts"> Dunkin Donuts </option>
+					<option value = "Burger King"> Burger King </option>
+					<option value = "Wendy's"> Wendy's </option>
+				</select>
+</div>
+<div class = "form-group">
+Borough: <select name = "borough" class = "form-control" form = "add">
+			<option value = "Queens"> Queens </option>
+			<option value = "Brooklyn"> Brooklyn </option>
+			<option value = "Bronx"> Bronx </option>
+			<option value = "Manhattan"> Manhattan </option>
+			<option value = "Staten Island"> Staten Island </option>
+			</select>
+</div>
+
+<form id = "add" method = "post" action = "">
+	<div class = "form-group">
+		Street Address: <input type = "text" name = "streetAddress" class="form-control">
+	</div>
+	<div class = "form-group">
+		Zip: <input type = "number" name = "zip" class="form-control">
+	</div>
+	<div class = "form-group">
+		Rating (out of 5): <input type = "number" name = "rating" class = "form-control" min = "1" max = "5">
+	</div>
+	<br>
+	<button type = "submit" class="btn btn-warning btn-lg"> Submit </button>
+</form>
+<div class = "form-group">
+	Review: <textarea name = "review" form = "add" class = "form-control"> Enter review here... </textarea>
+</div>

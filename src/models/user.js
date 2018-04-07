@@ -5,6 +5,10 @@ var bcrypt   = require('bcrypt-nodejs');
 
 const ReviewSchema = new mongoose.Schema({
 	storeName: {type: String, required: true},
+	borough: {type: String, required:true},
+	streetAddress: {type: String, required: true},
+	zip: {type: Number, required: true},
+	
 	review: {type: String, required: true},
 	rating: {type: Number, required: true},
 	user: { type: Schema.Types.ObjectId, ref: 'User'}
