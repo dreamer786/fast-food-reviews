@@ -1,13 +1,10 @@
 <div class="container">
 
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Your Reviews</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
     <div class="row">
-
-        <!-- LOCAL INFORMATION -->
         <div class="col-sm-6">
             <div class="well">
                 <h3><span class="fa fa-user"></span> Local</h3>
@@ -19,7 +16,38 @@
 
             </div>
         </div>
+        
 
     </div>
+    <div class = "row">
+            {{#if message}}
+                <p> {{message}} </p>
+            {{/if}}
+
+            {{#if results}}
+                 <h1><span  style = "text-align:center" class="fa fa-anchor"></span> Your Reviews</h1>
+
+                 <table class = "table">
+                    <tr>
+                        <th> Restaurant </th>
+                        <th> Street Address </th>
+                        <th> Borough </th>
+                        <th> Zip </th>
+                        <th> Review </th>
+                        <th> Rating </th>
+                    </tr>
+                {{#each results as |result|}}
+                <tr> 
+                    <td> {{result.storeName}} </td>
+                    <td> {{result.streetAddress}}</td>
+                    <td> {{result.borough}}</td>
+                    <td> {{result.zip}}</td>
+                    <td> {{result.review}}</td>
+                    <td> {{result.rating}} </td>                    
+                </tr>
+                {{/each}}
+            </table>
+            {{/if}}
+        </div>
 
 </div>

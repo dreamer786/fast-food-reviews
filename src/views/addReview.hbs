@@ -1,7 +1,7 @@
 <h1> Add a Review </h1>
 
 {{#if message}}
-	{{message}}
+	<p>{{message}}</p>
 {{/if}}
 <div class = "form-group">
 Fast Food Chain: <select name = "storeName" class="form-control" form = "add">
@@ -31,9 +31,9 @@ Borough: <select name = "borough" class = "form-control" form = "add">
 	<div class = "form-group">
 		Rating (out of 5): <input type = "number" name = "rating" class = "form-control" min = "1" max = "5">
 	</div>
+	<div class = "form-group">
+	Review: <textarea name = "review" form = "add" class = "form-control">  </textarea>
+	</div>
 	<br>
 	<button type = "submit" class="btn btn-warning btn-lg"> Submit </button>
 </form>
-<div class = "form-group">
-	Review: <textarea name = "review" form = "add" class = "form-control"> Enter review here... </textarea>
-</div>

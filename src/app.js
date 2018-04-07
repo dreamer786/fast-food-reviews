@@ -13,8 +13,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 require('./models/user');
-const User = mongoose.model("User");
-const Review = mongoose.model("Review");
+
 
 var configDB = require('./config/database.js');
 
@@ -26,7 +25,9 @@ require('./config/passport')(passport); // pass passport for configuration
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+app.use(bodyParser.urlencoded({extended: false}));
+
+//app.use(bodyParser()); // get information from html forms
 
 app.set('view engine', 'hbs'); 
 
@@ -45,6 +46,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use((req,res,next) =>{
 	if(req.session.user){
 		res.locals.user = req.session.user;
+		console.log("res locals", res.locals.user);
 		//console.log("req session user ", req.session.user);
 	}
 	next();

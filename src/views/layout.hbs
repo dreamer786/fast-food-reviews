@@ -12,12 +12,12 @@
 
     <div class="jumbotron text-center">
         <h1><span class="fa fa-lock"></span> Fast Food Reviews</h1>
+        <a href = "/">| Home |</a>
         {{#if user}}
-            <p id = "username"> Logged in as: {{user.username}} </p>
+            <p id = "username"> Logged in as: {{user.local.username}} </p>
             <a href = "/review/add"> | Add review </a> |
             <a href = "/profile"> My Reviews/Profile </a> |
         {{/if}}
-
         <p>Login or Register with:</p>
 
         <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>

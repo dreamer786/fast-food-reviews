@@ -4,16 +4,24 @@ module.exports = function(app, passport) {
     const Review = mongoose.model("Review");
     //home page
     app.get('/', function(req, res) {
-        Review.find({}, (err,result,count) => {
+        //higher order function 1
+        const queryKeys = Object.keys(req.query);
+        const filterObject = queryKeys.reduce(function (accum, curr){
+            if (req.query[curr]){
+                accum[curr] = req.query[curr];
+            }
+            return accum;
+        }, {});
+        Review.find(filterObject, (err,result,count) => {
             if (err){
                 console.log(err);
             }
             else{
+                console.log("result ", result);
                 res.render("index", {results: result});
             }
         });
     });
-
    
     // show the login form
     app.get('/login', function(req, res) {
@@ -47,7 +55,23 @@ module.exports = function(app, passport) {
     // PROFILE SECTION =====================
     // =====================================
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile');
+        // show all the user's reviews
+        Review.find({user: req.session.user._id}, (err, result, count) => {
+            if (err){
+                console.log(err);
+                res.render('profile', {message: "Database query error"});
+
+            }
+            else{
+                console.log("user reviews ", result);
+                if (result === []){
+                    res.render('profile', {message: "You have not posted any reviews"});
+                }
+                else{
+                    res.render('profile', {results: result});
+                }
+            }
+        });
     });
 
     // =====================================
@@ -83,7 +107,7 @@ module.exports = function(app, passport) {
             newReview.zip = req.body.zip;
             newReview.review = req.body.review;
             newReview.rating = req.body.rating;
-
+            newReview.user = req.session.user._id;
             newReview.save(err => {
                 if (err){
                     res.render("addReview", {message: "review save error"});
