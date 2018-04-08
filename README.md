@@ -96,3 +96,4 @@ An example Review
 
 1. http://www.passportjs.org/docs/username-password/ 
 2. http://api.jquery.com/category/forms/ 
+3. https://scotch.io/tutorials/easy-node-authentication-setup-and-local

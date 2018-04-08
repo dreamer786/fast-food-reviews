@@ -1,12 +1,10 @@
+//the passport setup in this file was taken from 
+
 var LocalStrategy   = require('passport-local').Strategy;
 var User = require('../models/db').User;
 var Review = require('../models/db').Review;
 
 module.exports = function(passport) {
-
-    // =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
     // required for persistent login sessions
     // passport needs ability to serialize and unserialize users out of session
 
@@ -22,12 +20,7 @@ module.exports = function(passport) {
         });
     });
 
-    // =========================================================================
-    // LOCAL SIGNUP ============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
-
+    
     passport.use('local-signup', new LocalStrategy({
         usernameField : 'username',
         passwordField : 'password',
@@ -38,8 +31,8 @@ module.exports = function(passport) {
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
 
-        // find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
+        // find a user whose username is the same as the forms username
+        // checking to see if the user trying to login already exists
         User.findOne({ 'local.username' :  username }, function(err, user) {
             // if there are any errors, return the error
             if (err)
@@ -79,15 +72,11 @@ module.exports = function(passport) {
 
 
     passport.use('local-login', new LocalStrategy({
-        // by default, local strategy uses username and password
         usernameField : 'username',
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, username, password, done) { // callback with email and password from our form
-
-        // find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
+    function(req, username, password, done) { 
         User.findOne({ 'local.username' :  username }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err)
@@ -107,8 +96,4 @@ module.exports = function(passport) {
         });
 
     }));
-
-
-
-
 };

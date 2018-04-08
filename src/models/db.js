@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var bcrypt   = require('bcrypt-nodejs');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bcrypt   = require('bcrypt-nodejs');
 
 
 const ReviewSchema = new mongoose.Schema({
@@ -14,7 +14,7 @@ const ReviewSchema = new mongoose.Schema({
 	user: { type: Schema.Types.ObjectId, ref: 'User'}
 });
 
-var userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
 	local: {username: {type:String, required: true},
 			email: {type:String, required: true}, 
 			password: {type:String, required:true},
@@ -22,7 +22,7 @@ var userSchema = mongoose.Schema({
 
 });
 
-
+//potentially add a store schema that contains all the reviews related to it or allow users to modify their reviews
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };

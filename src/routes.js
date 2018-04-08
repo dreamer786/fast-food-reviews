@@ -77,6 +77,7 @@ module.exports = function (app, passport) {
     //LOGOUT ISSUE- USER IS STILL IN RES.LOCALS?
     app.get('/logout', function(req, res) {
         req.logout();
+        console.log("req.session.user after logging out ", req.session.user);
         res.redirect('/');
     });
 
@@ -117,6 +118,9 @@ module.exports = function (app, passport) {
         }
     });
 
+    
+};
+
     // route middleware to make sure a user is logged in
     function isLoggedIn(req, res, next) {
 
@@ -127,5 +131,4 @@ module.exports = function (app, passport) {
         // if they aren't redirect them to the home page
         res.redirect('/');
     }
-};
 
