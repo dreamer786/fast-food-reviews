@@ -13,7 +13,6 @@
     <div class="jumbotron text-center">
         <h1><span class="fa fa-lock"></span> Fast Food Reviews</h1>
         <a href = "/">| Home |</a>
-        <!-- issue: this shows after user is logged out  -->
         {{#if user}}
             <p id = "username"> Logged in as: {{user.local.username}} </p>
             <a href = "/review/add"> | Add review </a> |

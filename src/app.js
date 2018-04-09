@@ -3,7 +3,7 @@
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 3000;
-console.log("port ", process.env.PORT);
+//console.log("port ", process.env.PORT);
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -64,7 +64,8 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use((req,res,next) =>{
 	if(req.session.user){
-		res.locals.user = req.session.user;
+		//res.locals.user = req.session.user;
+		res.locals.user = req.user;
 		//console.log("res locals", res.locals.user);
 		//console.log("req session user ", req.session.user);
 	}

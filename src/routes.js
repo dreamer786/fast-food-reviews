@@ -17,7 +17,7 @@ module.exports = function (app, passport) {
                 console.log(err);
             }
             else{
-                console.log("result ", result);
+               // console.log("result ", result);
                 res.render("index", {results: result});
             }
         });
@@ -79,6 +79,8 @@ module.exports = function (app, passport) {
         console.log("req logout ", req.logout);
         req.logout();
         console.log("req.session.user after logging out ", req.session.user);
+        console.log("req.user after logging out ", req.user);
+
         res.redirect('/');
     });
 
