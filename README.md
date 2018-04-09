@@ -80,6 +80,8 @@ An example Review
 	* logging in for my app will be with just a username and password. This will be useful in which it 
 	* implements the authentication, which saves lines of code and abstracts the code. 
 
+* (2 points) Bootstrap framework used
+
 * (3 points) Client-side Javascript library (JQuery)	
 	* JQuery abstracts html from javascript and wraps Javascript code into methods. I would use it to help
 	* with form validation. For example, if the user forgets to enter a field, that field can be highlighted to
