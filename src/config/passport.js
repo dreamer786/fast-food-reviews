@@ -1,5 +1,3 @@
-//the passport setup in this file was taken from 
-
 var LocalStrategy   = require('passport-local').Strategy;
 var User = require('../models/db').User;
 var Review = require('../models/db').Review;

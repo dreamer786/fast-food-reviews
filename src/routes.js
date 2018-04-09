@@ -76,10 +76,10 @@ module.exports = function (app, passport) {
 
     //LOGOUT ISSUE- USER IS STILL IN RES.LOCALS?
     app.get('/logout', function(req, res) {
-        console.log("req logout ", req.logout);
+        //console.log("req logout ", req.logout);
         req.logout();
-        console.log("req.session.user after logging out ", req.session.user);
-        console.log("req.user after logging out ", req.user);
+        //console.log("req.session.user after logging out ", req.session.user);
+        //console.log("req.user after logging out ", req.user);
 
         res.redirect('/');
     });
