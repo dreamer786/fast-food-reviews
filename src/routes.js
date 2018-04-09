@@ -63,7 +63,7 @@ module.exports = function (app, passport) {
 
             }
             else{
-                console.log("user reviews ", result);
+                //console.log("user reviews ", result);
                 if (result.length === 0){
                     res.render('profile', {message: "You have not posted any reviews"});
                 }
@@ -76,6 +76,7 @@ module.exports = function (app, passport) {
 
     //LOGOUT ISSUE- USER IS STILL IN RES.LOCALS?
     app.get('/logout', function(req, res) {
+        console.log("req logout ", req.logout);
         req.logout();
         console.log("req.session.user after logging out ", req.session.user);
         res.redirect('/');
@@ -118,6 +119,7 @@ module.exports = function (app, passport) {
         }
     });
 
+    //EDIT REVIEW 
     
 };
 

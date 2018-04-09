@@ -65,7 +65,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use((req,res,next) =>{
 	if(req.session.user){
 		res.locals.user = req.session.user;
-		console.log("res locals", res.locals.user);
+		//console.log("res locals", res.locals.user);
 		//console.log("req session user ", req.session.user);
 	}
 	next();

@@ -26,7 +26,6 @@
 
             {{#if results}}
                  <h1><span  style = "text-align:center;" class="fa fa-anchor"></span> Your Reviews</h1>
-
                  <table class = "table">
                     <tr>
                         <th> Restaurant </th>
@@ -43,7 +42,8 @@
                     <td> {{result.borough}}</td>
                     <td> {{result.zip}}</td>
                     <td> {{result.review}}</td>
-                    <td> {{result.rating}} </td>                    
+                    <td> {{result.rating}} </td>   
+                    <td> <a href = "/edit"> Edit Review </a></td>                 
                 </tr>
                 {{/each}}
             </table>
