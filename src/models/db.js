@@ -8,7 +8,6 @@ const ReviewSchema = new mongoose.Schema({
 	borough: {type: String, required:true},
 	streetAddress: {type: String, required: true},
 	zip: {type: Number, required: true},
-	
 	review: {type: String, required: true},
 	rating: {type: Number, required: true},
 	user: { type: Schema.Types.ObjectId, ref: 'User'}
@@ -18,11 +17,10 @@ const userSchema = mongoose.Schema({
 	local: {username: {type:String, required: true},
 			email: {type:String, required: true}, 
 			password: {type:String, required:true},
-			reviews: [ReviewSchema]}
+			reviews: [ReviewSchema]}// not sure if needed?? if delete, drop db
 
 });
 
-//potentially add a store schema that contains all the reviews related to it or allow users to modify their reviews
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };

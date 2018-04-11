@@ -17,3 +17,18 @@
 
         <button type="submit" class="btn btn-warning btn-lg">Signup</button>
 </form>
+<script src = "jquery.js"> </script>
+<script src = "jquery.validate.js"> </script>
+<script>
+    $("form").validate({
+    rules: {
+            username: {required: true, minLength: 7},
+            email: {required: true, email: true},
+            password: {required: true, minLength: 7}
+        },
+        messages: {
+            username: {required: "Please enter a username", minLength: "Your  username must be at least 7 characters long"},
+            password: {required: "Please enter a password", minLength: "Your password must be at least 7 characters long"}
+        }
+    });
+</script>

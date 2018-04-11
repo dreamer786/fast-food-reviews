@@ -2,45 +2,42 @@ module.exports = function (app, passport) {
     const mongoose = require('mongoose');
     const User = mongoose.model('User');
     const Review = mongoose.model('Review');
-    //home page
-    app.get('/', function(req, res) {
-        //higher order function 1
+    // home page
+    app.get('/', function (req, res) {
+        // higher order function 1
         const queryKeys = Object.keys(req.query);
-        const filterObject = queryKeys.reduce(function (accum, curr){
-            if (req.query[curr]){
+        const filterObject = queryKeys.reduce(function (accum, curr) {
+            if (req.query[curr]) {
                 accum[curr] = req.query[curr];
             }
             return accum;
         }, {});
         Review.find(filterObject, (err, result, count) => {
-            if (err){
+            if (err) {
                 console.log(err);
-            }
-            else{
+            } else {
                // console.log("result ", result);
-                res.render("index", {results: result});
+                res.render('index', {results: result});
             }
         });
     });
    
     // show the login form
     app.get('/login', function(req, res) {
-
-        // render the page and pass in any flash data if it exists
+    // render the page and pass in any flash data if it exists
         res.render('login', { message: req.flash('loginMessage') }); 
     });
-
+    
     // process the login form
      app.post('/login', passport.authenticate('local-login', {
-                        successRedirect : '/profile', // redirect to the secure profile section
-                        failureRedirect : '/login', // redirect back to the signup page if there is an error
-                        failureFlash : true // allow flash messages
+                        successRedirect: '/profile', // redirect to the secure profile section
+                        failureRedirect: '/login', // redirect back to the signup page if there is an error
+                        failureFlash: true // allow flash messages
     }));
 
     // show the signup form
-    app.get('/signup', function(req, res) {
-
-        // render the page and pass in any flash data if it exists
+    app.get('/signup', function (req, res) {
+    // render the page and pass in any flash data if it exists
         res.render('signup', { message: req.flash('signupMessage') });
     });
 
@@ -55,53 +52,49 @@ module.exports = function (app, passport) {
     // PROFILE SECTION =====================
     // =====================================
     app.get('/profile', isLoggedIn, function(req, res) {
-        // show all the user's reviews
-        Review.find({user: req.session.user._id}, (err, result, count) => {
-            if (err){
-                console.log(err);
-                res.render('profile', {message: "Database query error"});
-
-            }
-            else{
-                //console.log("user reviews ", result);
-                if (result.length === 0){
-                    res.render('profile', {message: "You have not posted any reviews"});
+        if (!req.user){
+            console.log('not logged in');
+            res.redirect("/");
+        }
+        else{
+            // show all the user's reviews
+            Review.find({user: req.session.user._id}, (err, result, count) => {
+                if (err) {
+                    console.log(err);
+                    res.render('profile', {message: 'Database query error'});
+                } else {
+                    //console.log("user reviews ", result);
+                    if (result.length === 0) {
+                        res.render('profile', {message: 'You have not posted any reviews'});
+                    } else {
+                        res.render('profile', {results: result});
+                    }
                 }
-                else{
-                    res.render('profile', {results: result});
-                }
-            }
-        });
+            });
+        }
     });
 
-    //LOGOUT ISSUE- USER IS STILL IN RES.LOCALS?
-    app.get('/logout', function(req, res) {
-        //console.log("req logout ", req.logout);
+    app.get('/logout', function (req, res) {
         req.logout();
-        //console.log("req.session.user after logging out ", req.session.user);
-        //console.log("req.user after logging out ", req.user);
-
         res.redirect('/');
     });
 
-    //ADD REVIEW
-    app.get("/review/add", function(req,res){
-        if (!req.session.user){
-            console.log("not logged in");
+    // ADD REVIEW
+    app.get('/review/add', function (req, res) {
+        if (!req.user) {
+            console.log('not logged in');
             res.redirect("/");
-        }
-        else{
-            res.render("addReview");
+        } else {
+            res.render('addReview');
         }
     });
 
-    //POST REVIEW
-    app.post("/review/add", function(req,res){
-        if (!req.session.user){
-            console.log("not logged in");
-            res.redirect("/");
-        }
-        else{
+    // POST REVIEW
+    app.post('/review/add', function (req, res) {
+        if (!req.user) {
+            console.log('not logged in');
+            res.redirect('/');
+        } else {
             const newReview = new Review();
             newReview.storeName = req.body.storeName;
             newReview.borough = req.body.borough;
@@ -111,28 +104,58 @@ module.exports = function (app, passport) {
             newReview.rating = req.body.rating;
             newReview.user = req.session.user._id;
             newReview.save(err => {
-                if (err){
-                    res.render("addReview", {message: "review save error"});
+                if (err) {
+                    res.render('addReview', {message: 'review save error'});
+                } else {
+                    res.redirect('/');
                 }
-                else{
-                    res.redirect("/");
-                }
-            })
+            });
         }
     });
+    // GET EDIT REVIEW FORM WITH OLD REVIEW PREFILLED
+    app.get("/edit/:id", function (req, res) {
+        if (!req.user) {
+            console.log('not logged in');
+            res.redirect('/');
+        } else{
+            Review.findOne({_id: req.params.id}, (err, result) => {
+                if (err){
+                    res.render("edit", {message: err});
+                } else{
+                    // console.log("review to edit ", result);
+                    res.render("edit", {editReview: result});
+                }
+            });
+        } 
+    });
+    // UPDATE REVIEW
+    app.post("/edit/:id", function (req, res) {
+        Review.findOneAndUpdate({_id: req.params.id}, { 
+                storeName: req.body.storeName,
+                borough: req.body.borough,
+                streetAddress: req.body.streetAddress,
+                zip: req.body.zip,
+                rating: req.body.rating,
+                review: req.body.review},
+                (err) => {
+                    if (err) {
+                        res.render("edit", {mesage: err});
+                    } else {
+                        res.redirect("/profile");
+                    }
+                }
 
-    //EDIT REVIEW 
-    
+            );
+        });
 };
-
-    // route middleware to make sure a user is logged in
-    function isLoggedIn(req, res, next) {
-
-        // if user is authenticated in the session, carry on 
-        if (req.isAuthenticated())
+// route middleware to make sure a user is logged in
+    function isLoggedIn (req, res, next) {
+        // if user is authenticated in the session, carry on
+        if (req.isAuthenticated()) {
             return next();
+        }
 
         // if they aren't redirect them to the home page
         res.redirect('/');
-    }
-
+    } 
+    
