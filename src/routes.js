@@ -2,6 +2,8 @@ module.exports = function (app, passport) {
     const mongoose = require('mongoose');
     const User = mongoose.model('User');
     const Review = mongoose.model('Review');
+    const path = require('path');
+
     // home page
     app.get('/', function (req, res) {
         // higher order function 1
@@ -147,6 +149,10 @@ module.exports = function (app, passport) {
 
             );
         });
+
+    app.get("/jquery.js", function (req,res){
+        res.sendFile(path.join(__dirname, "jquery.js"));
+    });
 };
 // route middleware to make sure a user is logged in
     function isLoggedIn (req, res, next) {

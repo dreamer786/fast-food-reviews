@@ -72,6 +72,7 @@ An example Review
 2. as a user, I can log in to the site
 3. as a user, I can create a new review
 4. as a user, I can view all of my reviews
+5. as a user, I can edit my reviews
 
 ## Research Topics
 
@@ -83,11 +84,11 @@ An example Review
 * (2 points) Bootstrap framework used
 
 * (3 points) Client-side Javascript library (JQuery)	
-	* JQuery abstracts html from javascript and wraps Javascript code into methods. I would use it to help
-	* with form validation. For example, if the user forgets to enter a field, that field can be highlighted to
-	* make it easy to see what information is missing. 
+	* JQuery abstracts html from javascript and wraps Javascript code into methods. 
+	* I used a jquery plugin called "jquery validation plugin" to ensure that users who 
+	* sign up do not have a short username and/or password.
 
-8 points total out of 8 required points 
+10 points total out of 8 required points 
 
 
 ## [Link to Initial Main Project File](app.js) 
@@ -97,5 +98,5 @@ An example Review
 ## Annotations / References Used
 
 1. http://www.passportjs.org/docs/username-password/ 
-2. http://api.jquery.com/category/forms/ 
-3. https://scotch.io/tutorials/easy-node-authentication-setup-and-local
+2. https://scotch.io/tutorials/easy-node-authentication-setup-and-local
+3. https://jqueryvalidation.org/
