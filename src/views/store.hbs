@@ -1,0 +1,24 @@
+
+{{#if message}}
+	<p>{{message}}</p>
+{{/if}}
+
+<h1 class = "text-center"> {{name}} </h1>
+
+
+<h2 class = "text-center"> {{address}} </h2>
+<h3 class = "text-center"> average rating: {{avgRating}} </h3>
+
+<table class = "table">
+	<tr>
+		<th> Review </th>
+		<th> Rating </th>
+	 </tr>
+
+	 {{#each reviews as |review|}}
+	 <tr>
+	 	<td> {{review.review}}</td>
+	 	<td> {{review.rating}} </td>
+	 </tr>
+	 {{/each}}
+</table>

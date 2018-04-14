@@ -1,6 +1,6 @@
-var LocalStrategy   = require('passport-local').Strategy;
-var User = require('../models/db').User;
-var Review = require('../models/db').Review;
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('../models/db').User;
+//const Review = require('../models/db').Review;
 
 module.exports = function(passport) {
     // required for persistent login sessions
@@ -33,8 +33,9 @@ module.exports = function(passport) {
         // checking to see if the user trying to login already exists
         User.findOne({ 'local.username' :  username }, function(err, user) {
             // if there are any errors, return the error
-            if (err)
+            if (err){
                 return done(err);
+            }
 
             // check to see if theres already a user with that username
             if (user) {
@@ -44,7 +45,7 @@ module.exports = function(passport) {
 
                 // if there is no user with that username
                 // create the user
-                var newUser = new User();
+                const newUser = new User();
 
                 // set the user's local credentials
                 newUser.local.email = req.body.email;
@@ -77,16 +78,19 @@ module.exports = function(passport) {
     function(req, username, password, done) { 
         User.findOne({ 'local.username' :  username }, function(err, user) {
             // if there are any errors, return the error before anything else
-            if (err)
+            if (err){
                 return done(err);
+            }
 
             // if no user is found, return the message
-            if (!user)
+            if (!user){
                 return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+            }
 
             // if the user is found but the password is wrong
-            if (!user.validPassword(password))
+            if (!user.validPassword(password)){
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+            }
 
             // all is well, return successful user
             req.session.user = user; 

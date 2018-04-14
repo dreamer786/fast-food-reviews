@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt   = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');
 
 
 const ReviewSchema = new mongoose.Schema({
@@ -14,12 +14,10 @@ const ReviewSchema = new mongoose.Schema({
 });
 
 const userSchema = mongoose.Schema({
-	local: {username: {type:String, required: true},
-			email: {type:String, required: true}, 
-			password: {type:String, required:true},
-			reviews: [ReviewSchema]}// not sure if needed?? if delete, drop db
-
-});
+	local: {username: {type: String, required: true},
+			email: {type: String, required: true}, 
+			password: {type: String, required: true}
+}});
 
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

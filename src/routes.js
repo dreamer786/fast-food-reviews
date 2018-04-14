@@ -1,8 +1,18 @@
+// route middleware to make sure a user is logged in
+    function isLoggedIn (req, res, next) {
+        // if user is authenticated in the session, carry on
+        if (req.isAuthenticated()) {
+            return next();
+        }
+
+        // if they aren't redirect them to the home page
+        res.redirect('/');
+    } 
 module.exports = function (app, passport) {
     const mongoose = require('mongoose');
-    const User = mongoose.model('User');
+    // const User = mongoose.model('User');
     const Review = mongoose.model('Review');
-    const path = require('path');
+    // const path = require('path');
 
     // home page
     app.get('/', function (req, res) {
@@ -14,7 +24,7 @@ module.exports = function (app, passport) {
             }
             return accum;
         }, {});
-        Review.find(filterObject, (err, result, count) => {
+        Review.find(filterObject, (err, result) => {
             if (err) {
                 console.log(err);
             } else {
@@ -60,18 +70,15 @@ module.exports = function (app, passport) {
         }
         else{
             // show all the user's reviews
-            Review.find({user: req.session.user._id}, (err, result, count) => {
-                if (err) {
-                    console.log(err);
-                    res.render('profile', {message: 'Database query error'});
-                } else {
-                    //console.log("user reviews ", result);
-                    if (result.length === 0) {
+            Review.find({user: req.session.user._id}, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.render('profile', {message: 'Database query error'});
+                    } else if (result.length === 0){
                         res.render('profile', {message: 'You have not posted any reviews'});
                     } else {
                         res.render('profile', {results: result});
                     }
-                }
             });
         }
     });
@@ -149,19 +156,37 @@ module.exports = function (app, passport) {
 
             );
         });
+    //get the reviews of one store and the average rating
+    app.get("/:storeAddress", function (req, res){
+        Review.find({}, (err, results) => {
+            if (err){
+                res.send("store", {message: err});
+            }
+            else{
+                //higher order function 2
+                //console.log("results ", results);
+                const store = results.filter((document) => {
+                    //console.log("document address ", document.streetAddress);
+                    //console.log("url address ", req.params.storeAddress);
+                    if (document.streetAddress === req.params.storeAddress){
+                        return document;
+                    }
+                });
+                //console.log("all store reviews ", store);
+                //higher order function 3
+                const avgRating = store.reduce((accum, ele) => {
+                    accum += ele.rating;
+                    return accum;
+                }, 0) / store.length;
 
-    app.get("/jquery.js", function (req,res){
-        res.sendFile(path.join(__dirname, "jquery.js"));
+                res.render("store", {avgRating: avgRating, reviews: store, address: req.params.storeAddress, name: store[0].storeName});
+
+            }
+
+        });
+
+
     });
-};
-// route middleware to make sure a user is logged in
-    function isLoggedIn (req, res, next) {
-        // if user is authenticated in the session, carry on
-        if (req.isAuthenticated()) {
-            return next();
-        }
 
-        // if they aren't redirect them to the home page
-        res.redirect('/');
-    } 
+};
     

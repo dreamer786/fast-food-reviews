@@ -1,14 +1,12 @@
-var express = require('express');
-var app = express();
-var port = process.env.PORT || 3000;
-var mongoose = require('mongoose');
-var passport = require('passport');
-var flash = require('connect-flash');
-
-var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require('express-session');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+const mongoose = require('mongoose');
+const passport = require('passport');
+const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const session = require('express-session');
 
 require('./models/db');
 
@@ -41,9 +39,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'hbs'); 
 
 // required for passport
-app.use(session({secret: 'iloveicecreamyouloveicecream',
-    			resave: false,
-    			saveUninitialized: true}));
+app.use(session({secret: 'iloveicecreamyouloveicecream', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -62,4 +58,3 @@ require('./routes.js')(app, passport); // load our routes and pass in our app an
 
 // launch ======================================================================
 app.listen(port);
-console.log('The magic happens on port ' + port);
