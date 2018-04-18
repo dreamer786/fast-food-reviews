@@ -1,9 +1,9 @@
 <div class = "container">
-	<h1><span  style = "text-align:center;" class="fa fa-anchor"></span> {{username}}'s Reviews</h1>
+	<h1 style = "text-align:center;">{{username}}'s reviews</h1>
 	{{#if message}}
         <p> {{message}} </p>
     {{/if}}
-	<h1><span  style = "text-align:center;" class="fa fa-anchor"></span> number of contributions: {{count}}</h1>
+	<h1 style = "text-align:center;">Number of contributions: {{count}}</h1>
 	{{#if results}}
 		<table class = "table">
             <tr>
@@ -13,7 +13,6 @@
                 <th> Zip </th>
                 <th> Review </th>
                 <th> Rating </th>
-                <th> Edit </th>
             </tr>
         	{{#each results as |result|}}
 	        	<tr> 
@@ -23,7 +22,6 @@
 		            <td> {{result.zip}}</td>
 		            <td> {{result.review}}</td>
 		            <td> {{result.rating}} </td>   
-		            <td> <a href = "/edit/{{result._id}}"> Edit Review </a></td>                 
 	       		</tr>
         	{{/each}}
 	    </table>

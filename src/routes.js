@@ -10,7 +10,7 @@
     } 
 module.exports = function (app, passport) {
     const mongoose = require('mongoose');
-    // const User = mongoose.model('User');
+    const User = mongoose.model('User');
     const Review = mongoose.model('Review');
     // const path = require('path');
 
@@ -186,6 +186,28 @@ module.exports = function (app, passport) {
         });
 
 
+    });
+    //show reviews of the user
+    app.get("/users/:username", function (req, res) {
+        //console.log("username ", req.params.username);
+        User.find({'local.username': req.params.username}, (err, result) => {
+            if (err){
+                console.log(err);
+            }
+            else{
+                Review.find({user: result[0]._id}, (err, results, count) => {
+                    if (err) {
+                        console.log(err);
+                        res.render('user', {message: 'Database query error'});
+                    } else if (result.length === 0){
+                        res.render('user', {message: 'User has not posted any reviews'});
+                    } else {
+                        res.render('user', {results: results, count: results.length, username: req.params.username});
+                    }
+                });
+            }
+        });
+        
     });
 
 };
