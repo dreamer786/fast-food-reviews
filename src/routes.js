@@ -178,7 +178,7 @@ module.exports = function (app, passport) {
                     return accum;
                 }, 0) / store.length;
 
-                res.render("store", {avgRating: avgRating, reviews: store, address: req.params.storeAddress, name: store[0].storeName});
+                res.render("store", {avgRating: avgRating, reviews: store, address: req.params.storeAddress, name: results[0].storeName});
 
             }
 
