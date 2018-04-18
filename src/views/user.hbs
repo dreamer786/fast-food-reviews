@@ -1,0 +1,31 @@
+<div class = "container">
+	<h1><span  style = "text-align:center;" class="fa fa-anchor"></span> {{username}}'s Reviews</h1>
+	{{#if message}}
+        <p> {{message}} </p>
+    {{/if}}
+	<h1><span  style = "text-align:center;" class="fa fa-anchor"></span> number of contributions: {{count}}</h1>
+	{{#if results}}
+		<table class = "table">
+            <tr>
+                <th> Restaurant </th>
+                <th> Street Address </th>
+                <th> Borough </th>
+                <th> Zip </th>
+                <th> Review </th>
+                <th> Rating </th>
+                <th> Edit </th>
+            </tr>
+        	{{#each results as |result|}}
+	        	<tr> 
+		            <td> {{result.storeName}} </td>
+		            <td> {{result.streetAddress}}</td>
+		            <td> {{result.borough}}</td>
+		            <td> {{result.zip}}</td>
+		            <td> {{result.review}}</td>
+		            <td> {{result.rating}} </td>   
+		            <td> <a href = "/edit/{{result._id}}"> Edit Review </a></td>                 
+	       		</tr>
+        	{{/each}}
+	    </table>
+	{{/if}}
+</div>
