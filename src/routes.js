@@ -4,7 +4,6 @@
         if (req.isAuthenticated()) {
             return next();
         }
-
         // if they aren't redirect them to the home page
         res.redirect('/');
     } 
@@ -184,8 +183,6 @@ module.exports = function (app, passport) {
             }
 
         });
-
-
     });
     //show reviews of the user
     app.get("/users/:username", function (req, res) {
@@ -195,7 +192,7 @@ module.exports = function (app, passport) {
                 console.log(err);
             }
             else{
-                Review.find({user: result[0]._id}, (err, results, count) => {
+                Review.find({user: result[0]._id}, (err, results) => {
                     if (err) {
                         console.log(err);
                         res.render('user', {message: 'Database query error'});
