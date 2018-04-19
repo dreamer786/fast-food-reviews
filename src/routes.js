@@ -162,12 +162,14 @@ module.exports = function (app, passport) {
                 res.send("store", {message: err});
             }
             else{
+            	let storeName;
                 //higher order function 2
                 //console.log("results ", results);
                 const store = results.filter((document) => {
                     //console.log("document address ", document.streetAddress);
                     //console.log("url address ", req.params.storeAddress);
                     if (document.streetAddress === req.params.storeAddress){
+                    	storeName = document.storeName;
                         return document;
                     }
                 });
@@ -178,13 +180,15 @@ module.exports = function (app, passport) {
                     return accum;
                 }, 0) / store.length;
 
-                res.render("store", {avgRating: avgRating, reviews: store, address: req.params.storeAddress, name: results[0].storeName});
+                res.render("store", {avgRating: avgRating, reviews: store, address: req.params.storeAddress, name: storeName});
 
             }
 
         });
     });
     //show reviews of the user
+
+    //TODO: MAKE SURE THAT INVALID USERNAMES DO NOT MAKE IT CRASH
     app.get("/users/:username", function (req, res) {
         //console.log("username ", req.params.username);
         User.find({'local.username': req.params.username}, (err, result) => {
