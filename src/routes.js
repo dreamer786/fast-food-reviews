@@ -157,9 +157,12 @@ module.exports = function (app, passport) {
         });
     //get the reviews of one store and the average rating
     app.get("/:storeAddress", function (req, res){
-        Review.find({}, (err, results) => {
+        Review.find({streetAddress: req.params.storeAddress}, (err, results) => {
             if (err){
-                res.send("store", {message: err});
+                res.render("store", {message: err});
+            }
+            else if (results.length === 0){
+                res.render("store", {message: "we do not have any reviews on this store"});
             }
             else{
             	let storeName;

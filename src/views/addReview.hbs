@@ -4,7 +4,7 @@
 	<p>{{message}}</p>
 {{/if}}
 <div class = "form-group">
-Fast Food Chain: <select name = "storeName" class="form-control" form = "add">
+Fast Food Chain: <select name = "storeName" class="form-control" form = "add" required>
 					<option value = "McDonald's"> McDonald's </option>
 					<option value = "Dunkin Donuts"> Dunkin Donuts </option>
 					<option value = "Burger King"> Burger King </option>
@@ -12,7 +12,7 @@ Fast Food Chain: <select name = "storeName" class="form-control" form = "add">
 				</select>
 </div>
 <div class = "form-group">
-Borough: <select name = "borough" class = "form-control" form = "add">
+Borough: <select name = "borough" class = "form-control" form = "add" required>
 			<option value = "Queens"> Queens </option>
 			<option value = "Brooklyn"> Brooklyn </option>
 			<option value = "Bronx"> Bronx </option>
@@ -23,16 +23,16 @@ Borough: <select name = "borough" class = "form-control" form = "add">
 
 <form id = "add" method = "post" action = "">
 	<div class = "form-group">
-		Street Address: <input type = "text" name = "streetAddress" class="form-control">
+		Street Address: <input type = "text" name = "streetAddress" class="form-control" required>
 	</div>
 	<div class = "form-group">
-		Zip: <input type = "number" name = "zip" class="form-control">
+		Zip: <input type = "number" name = "zip" class="form-control" required>
 	</div>
 	<div class = "form-group">
-		Rating (out of 5): <input type = "number" name = "rating" class = "form-control" min = "1" max = "5">
+		Rating (out of 5): <input type = "number" name = "rating" class = "form-control" min = "1" max = "5" required>
 	</div>
 	<div class = "form-group">
-	Review: <textarea name = "review" form = "add" class = "form-control">  </textarea>
+		Review: <textarea name = "review" form = "add" class = "form-control" required>  </textarea>
 	</div>
 	<br>
 	<button type = "submit" class="btn btn-warning btn-lg"> Submit </button>
