@@ -1,3 +1,4 @@
+//passport configuration taken from the tutorial https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/db').User;
 //const Review = require('../models/db').Review;

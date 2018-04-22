@@ -120,7 +120,7 @@ module.exports = function (app, passport) {
             });
         }
     });
-    // GET EDIT REVIEW FORM WITH OLD REVIEW PREFILLED
+    // EDIT REVIEW FORM WITH OLD REVIEW PREFILLED
     app.get("/edit/:id", function (req, res) {
         if (!req.user) {
             console.log('not logged in');
@@ -187,13 +187,16 @@ module.exports = function (app, passport) {
         });
     });
     //show reviews of the user
-
-    //TODO: MAKE SURE THAT INVALID USERNAMES DO NOT MAKE IT CRASH
     app.get("/users/:username", function (req, res) {
         //console.log("username ", req.params.username);
         User.find({'local.username': req.params.username}, (err, result) => {
             if (err){
-                console.log(err);
+                //console.log(err);
+                res.render('user', {message:err})
+            }
+            else if (result.length === 0 ){
+                res.render('user', {message: "this user does not exist"});
+
             }
             else{
                 Review.find({user: result[0]._id}, (err, results) => {

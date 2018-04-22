@@ -1,29 +1,30 @@
 <div class = "container">
-	<h1 style = "text-align:center;">{{username}}'s reviews</h1>
 	{{#if message}}
         <p> {{message}} </p>
-    {{/if}}
-	<h1 style = "text-align:center;">Number of contributions: {{count}}</h1>
-	{{#if results}}
-		<table class = "table">
-            <tr>
-                <th> Restaurant </th>
-                <th> Street Address </th>
-                <th> Borough </th>
-                <th> Zip </th>
-                <th> Review </th>
-                <th> Rating </th>
-            </tr>
-        	{{#each results as |result|}}
-	        	<tr> 
-		            <td> {{result.storeName}} </td>
-		            <td> {{result.streetAddress}}</td>
-		            <td> {{result.borough}}</td>
-		            <td> {{result.zip}}</td>
-		            <td> {{result.review}}</td>
-		            <td> {{result.rating}} </td>   
-	       		</tr>
-        	{{/each}}
-	    </table>
+    {{else}}
+		<h1 style = "text-align:center;">{{username}}'s reviews</h1>
+		<h1 style = "text-align:center;">Number of contributions: {{count}}</h1>
+		{{#if results}}
+			<table class = "table">
+	            <tr>
+	                <th> Restaurant </th>
+	                <th> Street Address </th>
+	                <th> Borough </th>
+	                <th> Zip </th>
+	                <th> Review </th>
+	                <th> Rating </th>
+	            </tr>
+	        	{{#each results as |result|}}
+		        	<tr> 
+			            <td> {{result.storeName}} </td>
+			            <td> {{result.streetAddress}}</td>
+			            <td> {{result.borough}}</td>
+			            <td> {{result.zip}}</td>
+			            <td> {{result.review}}</td>
+			            <td> {{result.rating}} </td>   
+		       		</tr>
+	        	{{/each}}
+		    </table>
+		{{/if}}
 	{{/if}}
 </div>
