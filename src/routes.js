@@ -40,7 +40,7 @@ module.exports = function (app, passport) {
     });
     
     // process the login form
-     app.post('/login', passport.authenticate('local-login', {
+    app.post('/login', passport.authenticate('local-login', {
                         successRedirect: '/profile', // redirect to the secure profile section
                         failureRedirect: '/login', // redirect back to the signup page if there is an error
                         failureFlash: true // allow flash messages
@@ -53,11 +53,11 @@ module.exports = function (app, passport) {
     });
 
     // process the signup form
-     app.post('/signup', passport.authenticate('local-signup', {
+    app.post('/signup', passport.authenticate('local-signup', {
         successRedirect: '/profile',
         failureRedirect: '/signup',
         failureFlash: 'true'
-     }));
+    }));
 
     // =====================================
     // PROFILE SECTION =====================
@@ -123,7 +123,7 @@ module.exports = function (app, passport) {
     // EDIT REVIEW FORM WITH OLD REVIEW PREFILLED
     app.get("/edit/:id", function (req, res) {
         if (!req.user) {
-            console.log('not logged in');
+            //console.log('not logged in');
             res.redirect('/');
         } else{
             Review.findOne({_id: req.params.id}, (err, result) => {

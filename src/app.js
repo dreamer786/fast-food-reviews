@@ -10,6 +10,8 @@ const session = require('express-session');
 
 require('./models/db');
 
+//setup based on tutorial from https://scotch.io/tutorials/easy-node-authentication-setup-and-local
+
 // is the environment variable, NODE_ENV, set to PRODUCTION?
 let dbconf;
 if (process.env.NODE_ENV === 'PRODUCTION') {

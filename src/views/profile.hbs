@@ -28,7 +28,6 @@
                  <h1><span  style = "text-align:center;" class="fa fa-anchor"></span> Your Reviews</h1>
                  <table class = "table">
                     <tr>
-                        <th> id </th>
                         <th> Restaurant </th>
                         <th> Street Address </th>
                         <th> Borough </th>
@@ -39,7 +38,6 @@
                     </tr>
                 {{#each results as |result|}}
                 <tr> 
-                    <td> {{result._id}} </td>
                     <td> {{result.storeName}} </td>
                     <td> {{result.streetAddress}}</td>
                     <td> {{result.borough}}</td>
